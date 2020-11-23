@@ -25,4 +25,5 @@ function Home() {
   );
 }
 
-export default Color(Home);
+export default Home;
+// export default Color(Home);

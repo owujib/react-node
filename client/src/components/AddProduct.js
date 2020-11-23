@@ -20,7 +20,6 @@ class AddProduct extends Component {
   };
 
   static getDerivedStateFromProps(state, props) {
-    console.log({ state, props });
     if (props.err !== state.err) {
       return {
         err: state.err.message,
@@ -45,7 +44,11 @@ class AddProduct extends Component {
     return (
       <div className="container ">
         <h4>Post form</h4>
-        {this.state.err ? <p className="bg-danger">{this.state.err}</p> : ''}
+        {this.state.err ? (
+          <p className="alert alert-danger">{this.state.err}</p>
+        ) : (
+          ''
+        )}
         <Form
           onSubmit={this.handleSubmit}
           method="POST"

@@ -25,7 +25,6 @@ class App extends React.Component {
     return (
       <div>
         <Navigation />
-
         <Route path="/" exact component={Home} />
         <Route path="/product/:id" component={ProductList} />
 

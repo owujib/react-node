@@ -35,7 +35,6 @@ router.post('/create-product', productController.createProduct);
 router.patch('/:id/update-product', productController.updateProduct);
 
 router.patch('/:id/upload-img', upload, async (req, res, next) => {
-  console.log(req.file);
   const product = await Product.findByIdAndUpdate(
     { _id: req.params.id },
     { productImg: `/uploads/product-img/${req.file.filename}` },

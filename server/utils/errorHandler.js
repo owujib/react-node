@@ -14,7 +14,6 @@ const productionErrors = (err, res) => {
       message: err.message,
     });
   } else {
-    console.error('Error :', err);
     return res.status(500).json({
       status: 'error',
       message: 'something went wrong',
@@ -26,7 +25,6 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'errors';
   if (process.env.NODE_ENV === 'development') {
-    console.log(err);
     return res.status(err.statusCode).json({
       status: err.status,
       error: err,

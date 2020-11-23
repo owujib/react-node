@@ -1,37 +1,64 @@
 import React from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Auth from '../hoc/Auth';
 
-export default function Navigation() {
-  return (
-    <div>
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav>
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </Nav>
-            <Nav>
-              <Link className="nav-link" to="/product">
-                Products
-              </Link>
-            </Nav>
-            <Nav>
+class Navigation extends React.Component {
+  static getDerivedStateFromProps(props, state) {
+    console.log(props);
+    return null;
+  }
+  render() {
+    return (
+      <div>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav>
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
+              </Nav>
+              <Nav>
+                <Link className="nav-link" to="/product">
+                  Products
+                </Link>
+              </Nav>
+              {/* {this.props.user.role !== 'admin' ? ( */}
+              ''
+              {/* ) : ( */}
+              <Nav>
+                {' '}
+                <Link className="nav-link" to="/add/product">
+                  New Product
+                </Link>
+              </Nav>
+              {/* )} */}
+              {/* <Nav>
               <Link className="nav-link" to="/add/product">
                 New Product
               </Link>
+            </Nav> */}
             </Nav>
-          </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Navbar>
-    </div>
-  );
+            <Nav inline>
+              <Nav>
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </Nav>
+              <Nav>
+                <Link className="nav-link" to="/register">
+                  Register
+                </Link>
+              </Nav>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </div>
+    );
+  }
 }
+
+export default Auth(Navigation);
