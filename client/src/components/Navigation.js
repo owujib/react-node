@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import Auth from '../hoc/Auth';
 
 class Navigation extends React.Component {
-  static getDerivedStateFromProps(props, state) {
-    console.log(props);
-    return null;
-  }
   render() {
     return (
       <div>
@@ -27,10 +23,9 @@ class Navigation extends React.Component {
                 </Link>
               </Nav>
               {/* {this.props.user.role !== 'admin' ? ( */}
-              ''
+
               {/* ) : ( */}
               <Nav>
-                {' '}
                 <Link className="nav-link" to="/add/product">
                   New Product
                 </Link>
@@ -42,7 +37,7 @@ class Navigation extends React.Component {
               </Link>
             </Nav> */}
             </Nav>
-            <Nav inline>
+            <Nav>
               <Nav>
                 <Link className="nav-link" to="/login">
                   Login

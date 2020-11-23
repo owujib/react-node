@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Jumbotron } from 'react-bootstrap';
-import Color from '../hoc/Color';
-import '../App.css';
 
 function Home() {
   return (

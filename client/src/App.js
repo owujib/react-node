@@ -35,7 +35,7 @@ class App extends React.Component {
             <Product {...routerProps} products={this.state.products} />
           )}
         />
-        <Route path="/add/product" component={Auth(AddProduct, true, true)} />
+        <Route path="/add/product" component={Auth(AddProduct, false, true)} />
         <Route path="/:id/add/image" component={AddProductImage} />
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
