@@ -534,3 +534,7 @@
 [1123/224939.155:ERROR:process_memory_win.cc(73)] ReadMemory at 0x7ff910c9b4c0 of 64 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
 [1123/224939.157:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
 [1123/225320.877:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1124/004246.144:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1124/004246.144:ERROR:exception_snapshot_win.cc(99)] thread ID 14796 not found in process
+[1124/004246.153:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1124/004246.154:ERROR:exception_snapshot_win.cc(99)] thread ID 3324 not found in process

@@ -1,8 +1,7 @@
 import React from 'react';
-// import proptypes from 'prop-types';
+import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route } from 'react-router-dom';
-
 import './App.css';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
@@ -15,15 +14,23 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Auth from './hoc/Auth';
 
+import { getProfile } from './actions/userActions';
+
 class App extends React.Component {
   state = {
-    products: [],
+    user: {},
     err: {},
   };
 
+  componentDidMount() {
+    this.props.getProfile();
+  }
+
   render() {
+    const { user } = this.props;
     return (
       <div>
+        {/* <Navigation isLoggedIn={user.isLoggedIn} user={user} /> */}
         <Navigation />
         <Route path="/" exact component={Home} />
         <Route path="/product/:id" component={ProductList} />
@@ -47,4 +54,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+  user,
+});
+
+export default connect(mapStateToProps, { getProfile })(App);

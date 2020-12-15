@@ -54,4 +54,5 @@
 }
 .pink-text {
   color: pink;
+  /* list-style-type: decimal-leading-zero; */
 }

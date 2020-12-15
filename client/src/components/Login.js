@@ -13,6 +13,7 @@ class Login extends Component {
       email: null,
       password: null,
       err: null,
+      redirect: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,7 +40,11 @@ class Login extends Component {
       password: this.state.password,
     };
     this.props.login(data);
+    this.setState({
+      redirect: true,
+    });
   }
+
   render() {
     return (
       <div className="container  p-3">
@@ -74,7 +79,7 @@ class Login extends Component {
           >
             Login
           </Button>
-          {this.props.redirect && this.props.history.push('/')}
+          {this.state.redirect && this.props.history.push('/')}
         </Form>
       </div>
     );

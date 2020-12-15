@@ -9,6 +9,7 @@ const initialState = {
   user: null,
   err: null,
   redirect: null,
+  isLoggedIn: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -17,20 +18,23 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
-        redirect: true,
+        redirect: false,
+        isLoggedIn: true,
       };
 
     case LOGIN_ERR:
       return {
         ...state,
         err: action.payload,
-        redirect: false,
+        redirect: true,
       };
     case GET_PROFILE:
       return {
         ...state,
         user: action.payload,
         redirect: true,
+        isLoggedIn: true,
+        redirect: false,
       };
     case GET_PROFILE_ERR:
       return {

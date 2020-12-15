@@ -1,10 +1,15 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Auth from '../hoc/Auth';
 
 class Navigation extends React.Component {
   render() {
+    console.log(this.props);
+    const {
+      user: { user: user, history },
+    } = this.props;
+    console.log({ history });
     return (
       <div>
         <Navbar bg="light" expand="lg">
@@ -38,16 +43,36 @@ class Navigation extends React.Component {
             </Nav> */}
             </Nav>
             <Nav>
-              <Nav>
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </Nav>
-              <Nav>
-                <Link className="nav-link" to="/register">
-                  Register
-                </Link>
-              </Nav>
+              {!user.isLoggedIn ? (
+                <>
+                  {' '}
+                  <Nav>
+                    <Link className="nav-link" to="/login">
+                      Login
+                    </Link>
+                  </Nav>
+                  <Nav>
+                    <Link className="nav-link" to="/register">
+                      Register
+                    </Link>
+                  </Nav>
+                </>
+              ) : (
+                <Nav>
+                  <Link
+                    to="#"
+                    className="nav-link"
+                    onClick={(e) => {
+                      localStorage.removeItem('user');
+                      // this.props.history.push('/');
+                      history.push('/');
+                      // window.location = '/';
+                    }}
+                  >
+                    LogOut
+                  </Link>
+                </Nav>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -56,4 +81,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default Auth(Navigation);
+export default withRouter(Auth(Navigation));

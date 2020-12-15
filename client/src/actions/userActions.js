@@ -1,15 +1,16 @@
 import axios from 'axios';
 import { LOGIN, LOGIN_ERR, GET_PROFILE, GET_PROFILE_ERR } from './types';
 
-export function login(data) {
+export function login(userInput) {
   return function (dispatch) {
     axios
-      .post('http://localhost:4000/api/user/login', data)
-      .then((response) => {
-        localStorage.setItem('auth_token', response.data.message.token);
+      .post('http://localhost:4000/api/user/login', userInput)
+      .then(({ data }) => {
+        let user = JSON.stringify(data.message);
+        localStorage.setItem('user', user);
         return dispatch({
           type: LOGIN,
-          payload: response.data.message,
+          payload: data.message,
         });
         // localStorage.setItem('auth_token', response.data.message.token);
         // this.props.history.push('/');
@@ -21,31 +22,32 @@ export function login(data) {
       .catch((err) => {
         return dispatch({
           type: LOGIN_ERR,
-          payload: err.response.data,
+          payload: err.response,
         });
       });
   };
 }
 
 export function getProfile() {
+  const user = JSON.parse(localStorage.getItem('user'));
   return function (dispatch) {
     axios
       .get('http://localhost:4000/api/user/profile', {
         headers: {
-          auth_token: localStorage.getItem('auth_token'),
+          auth_token: !user ? '' : user.token,
         },
       })
-      .then((response) => {
-        localStorage.setItem('auth_token', response.data);
+      .then(({ data }) => {
+        // localStorage.setItem('auth_token', response.data);
         return dispatch({
           type: GET_PROFILE,
-          payload: response.data,
+          payload: data,
         });
       })
       .catch((err) => {
         return dispatch({
           type: GET_PROFILE_ERR,
-          payload: err.response.data,
+          payload: err.response,
         });
       });
   };
