@@ -17,8 +17,7 @@ const Auth = (WrappedComponent, reload, adminRoute = null) => {
       if (data !== null) {
         state.user = data.user;
         state.isLoggedIn = true;
-
-        return;
+        return null;
       }
 
       return null;
@@ -31,7 +30,8 @@ const Auth = (WrappedComponent, reload, adminRoute = null) => {
         isAdmin: false,
         user: {},
       });
-      return this.props.history.push('/login');
+      this.props.history.push('/login');
+      return;
     };
 
     componentDidMount() {
@@ -50,7 +50,11 @@ const Auth = (WrappedComponent, reload, adminRoute = null) => {
       // return <WrappedComponent user={this.props} />;
       return (
         <div>
-          <WrappedComponent data={this.state} logout={this.logout} />
+          <WrappedComponent
+            data={this.state}
+            props={this.props}
+            logout={this.logout}
+          />
         </div>
       );
     }

@@ -9,6 +9,7 @@ import Product from './components/Product';
 import ProductList from './components/ProductList';
 import AddProduct from './components/AddProduct';
 import AddProductImage from './components/AddProductImage';
+import UpdateProduct from './components/UpdateProduct';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
@@ -42,7 +43,15 @@ class App extends React.Component {
           )}
         />
         <Route path="/add/product" component={Auth(AddProduct, false, true)} />
-        <Route path="/:id/add/image" component={AddProductImage} />
+        <Route
+          path="/:id/add/image"
+          component={Auth(AddProductImage, false, true)}
+        />
+        <Route
+          path="/:id/edit/product"
+          component={Auth(UpdateProduct, false, true)}
+        />
+        {/* <Route path="/:id/add/image" component={AddProductImage} /> */}
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
         <Route path="/register">

@@ -6,11 +6,12 @@ import axios from 'axios';
 
 import { createProduct } from '../actions/productActions';
 
-class AddProduct extends Component {
+class UpdateProduct extends Component {
   state = {
     name: '',
     description: '',
-    err: null,
+    err: {},
+    product: {},
   };
 
   handleChange = (e) => {
@@ -22,10 +23,18 @@ class AddProduct extends Component {
   static getDerivedStateFromProps(state, props) {
     if (props.err !== state.err) {
       return {
-        err: state.err.message,
+        err: state.err,
       };
     }
     return null;
+  }
+
+  componentDidMount() {
+    let { id } = this.props.props.match.params;
+    axios
+      .get('http://localhost:4000/api/product/' + id)
+      .then((response) => this.setState({ product: response.data.message }))
+      .catch((err) => this.setState({ err }));
   }
 
   handleSubmit = (e) => {
@@ -86,7 +95,7 @@ const mapStateToProps = (state) => ({
   err: state.products.err,
 });
 
-export default connect(mapStateToProps, { createProduct })(AddProduct);
+export default connect(mapStateToProps, { createProduct })(UpdateProduct);
 
 // handleSubmit = (e) => {
 //   e.preventDefault();

@@ -19,26 +19,31 @@ function CardList({
   });
   //   const colorData =
   return (
-    <div className="card p-3">
-      <h1>List</h1>
-      <h4>
-        <Link to={'/product/' + _id}>{name}</Link>
-      </h4>
+    <div className="card">
       <img className="img-fluid" src={'http://localhost:4000' + productImg} />
-      <div>sizes: {sizeData}</div>
-      <div>
-        color:
-        {color.map((element, id) => {
-          return (
-            <strong key={id} className="m-1">
-              {element}
-            </strong>
-          );
-        })}
-      </div>
-
-      <p>{description}</p>
+      <h5 className="card-header">
+        <Link to={'/product/' + _id} className="text-secondary">
+          {name}
+        </Link>
+      </h5>
       <hr />
+      <div className="card-body">
+        <div>sizes: {sizeData}</div>
+        <hr />
+        <div>
+          color:
+          {color.map((element, id) => {
+            return (
+              <strong key={id} className="m-1">
+                {element}
+              </strong>
+            );
+          })}
+          <hr />
+        </div>
+
+        <p>{description}</p>
+      </div>
     </div>
   );
 }

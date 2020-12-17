@@ -8,7 +8,7 @@ class AddProductImage extends Component {
   };
 
   handleSubmit = (e) => {
-    let { id } = this.props.match.params;
+    let { id } = this.props.props.match.params;
     console.log(this.state);
     const data = new FormData();
     data.append('image', this.state.image);
