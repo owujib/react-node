@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { FormGroup, FormControl, Button, Form } from 'react-bootstrap';
 import { login } from '../actions/userActions';
 // import axios from 'axios';
@@ -80,7 +80,7 @@ class Login extends Component {
           >
             Login
           </Button>
-          {this.props.redirect && this.props.history.push('/products')}
+          {this.props.redirect && <Redirect to="product" />}
         </Form>
       </div>
     );

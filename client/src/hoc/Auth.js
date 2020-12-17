@@ -40,17 +40,11 @@ const Auth = (WrappedComponent, reload, adminRoute = null) => {
         this.props.history.push('/login');
         return;
       }
-      if (user) {
-        if (user.user.role !== 'admin') {
-          console.log('say no admin');
-          return;
-        }
-        this.setState({
-          user: user.user,
-          isLoggedIn: true,
-          isAdmin: user.user.role !== 'admin' ? false : true,
-        });
-      }
+      this.setState({
+        user: user.user,
+        isLoggedIn: true,
+        isAdmin: user.user.role !== 'admin' ? false : true,
+      });
     }
     render() {
       // return <WrappedComponent user={this.props} />;
