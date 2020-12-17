@@ -22,17 +22,16 @@ class App extends React.Component {
     err: {},
   };
 
-  componentDidMount() {
-    this.props.getProfile();
-  }
+  // componentDidMount() {
+  //   this.props.getProfile();
+  // }
 
   render() {
-    const { user } = this.props;
     return (
       <div>
         {/* <Navigation isLoggedIn={user.isLoggedIn} user={user} /> */}
         <Navigation />
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={Auth(Home)} />
         <Route path="/product/:id" component={ProductList} />
 
         <Route

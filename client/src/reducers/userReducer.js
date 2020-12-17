@@ -18,7 +18,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
-        redirect: false,
+        redirect: true,
         isLoggedIn: true,
       };
 
@@ -26,7 +26,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         err: action.payload,
-        redirect: true,
+        redirect: false,
       };
     case GET_PROFILE:
       return {

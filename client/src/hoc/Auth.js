@@ -1,47 +1,64 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { getProfile } from '../actions/userActions';
 const Auth = (WrappedComponent, reload, adminRoute = null) => {
   class Auth extends React.Component {
     state = {
-      user: null,
+      isLoggedIn: false,
+      isAdmin: false,
+      user: {},
     };
 
-    // static getDerivedStateFromProps(state, props) {
-    //   if (props.err !== state.err) {
-    //     return {
-    //       err: props.err,
-    //     };
-    //   }
-    //   return null;
-    // }
+    static getDerivedStateFromProps(props, state) {
+      console.log({ props, state });
+      const data = JSON.parse(localStorage.getItem('user'));
+      if (data !== null) {
+        state.user = data.user;
+        state.isLoggedIn = true;
 
-    componentDidMount() {
-      this.props.getProfile();
-      const user = !JSON.parse(localStorage.getItem('user'))
-        ? ''
-        : JSON.parse(localStorage.getItem('user'));
-
-      if (adminRoute && user.role === 'user') {
-        console.log('not admin');
-        this.props.history.push('/');
         return;
       }
-      if (reload === false) {
+
+      return null;
+    }
+
+    logout = () => {
+      localStorage.removeItem('user');
+      this.setState({
+        isLoggedIn: false,
+        isAdmin: false,
+        user: {},
+      });
+      return this.props.history.push('/login');
+    };
+
+    componentDidMount() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user === null) {
         this.props.history.push('/login');
         return;
       }
-      //   })
-      //   .catch((err) => {
-      //     if (err) {
-      //       this.props.history.push('/');
-      //     }
-      //   });
+      if (user) {
+        if (user.user.role !== 'admin') {
+          console.log('say no admin');
+          return;
+        }
+        this.setState({
+          user: user.user,
+          isLoggedIn: true,
+          isAdmin: user.user.role !== 'admin' ? false : true,
+        });
+      }
     }
     render() {
-      return <WrappedComponent user={this.props} />;
+      // return <WrappedComponent user={this.props} />;
+      return (
+        <div>
+          <WrappedComponent data={this.state} logout={this.logout} />
+        </div>
+      );
     }
   }
 
@@ -49,7 +66,6 @@ const Auth = (WrappedComponent, reload, adminRoute = null) => {
     user,
   });
 
-  // return withRouter(Auth);
   return connect(mapStateToProps, { getProfile })(withRouter(Auth));
 };
 

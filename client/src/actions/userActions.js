@@ -22,7 +22,7 @@ export function login(userInput) {
       .catch((err) => {
         return dispatch({
           type: LOGIN_ERR,
-          payload: err.response,
+          payload: err.response.data.message,
         });
       });
   };
@@ -47,7 +47,7 @@ export function getProfile() {
       .catch((err) => {
         return dispatch({
           type: GET_PROFILE_ERR,
-          payload: err.response,
+          payload: err.response.message,
         });
       });
   };

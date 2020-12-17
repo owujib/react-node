@@ -23,7 +23,7 @@ class Login extends Component {
   static getDerivedStateFromProps(props, state) {
     if (props.err !== state.err) {
       return {
-        err: props.err.message,
+        err: props.err,
       };
     }
     return null;
@@ -40,6 +40,7 @@ class Login extends Component {
       password: this.state.password,
     };
     this.props.login(data);
+    console.log(this.props);
     this.setState({
       redirect: true,
     });
@@ -49,7 +50,7 @@ class Login extends Component {
     return (
       <div className="container  p-3">
         {this.props.err ? (
-          <p className="alert alert-danger">{this.props.err.message}</p>
+          <p className="alert alert-danger">{this.props.err}</p>
         ) : (
           ''
         )}
@@ -79,7 +80,7 @@ class Login extends Component {
           >
             Login
           </Button>
-          {this.state.redirect && this.props.history.push('/')}
+          {this.props.redirect && this.props.history.push('/products')}
         </Form>
       </div>
     );

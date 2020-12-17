@@ -4,12 +4,15 @@ import { Link, withRouter } from 'react-router-dom';
 import Auth from '../hoc/Auth';
 
 class Navigation extends React.Component {
+  state = {};
+  // componentDidMount() {
+  //   const {
+  //     user: { user: user, history },
+  //   } = this.props;
+  // }
+
   render() {
     console.log(this.props);
-    const {
-      user: { user: user, history },
-    } = this.props;
-    console.log({ history });
     return (
       <div>
         <Navbar bg="light" expand="lg">
@@ -27,15 +30,15 @@ class Navigation extends React.Component {
                   Products
                 </Link>
               </Nav>
-              {/* {this.props.user.role !== 'admin' ? ( */}
-
-              {/* ) : ( */}
-              <Nav>
-                <Link className="nav-link" to="/add/product">
-                  New Product
-                </Link>
-              </Nav>
-              {/* )} */}
+              {this.props.data.user.role !== 'admin' ? (
+                ''
+              ) : (
+                <Nav>
+                  <Link className="nav-link" to="/add/product">
+                    New Product
+                  </Link>
+                </Nav>
+              )}
               {/* <Nav>
               <Link className="nav-link" to="/add/product">
                 New Product
@@ -43,7 +46,7 @@ class Navigation extends React.Component {
             </Nav> */}
             </Nav>
             <Nav>
-              {!user.isLoggedIn ? (
+              {!this.props.data.isLoggedIn ? (
                 <>
                   {' '}
                   <Nav>
@@ -59,16 +62,7 @@ class Navigation extends React.Component {
                 </>
               ) : (
                 <Nav>
-                  <Link
-                    to="#"
-                    className="nav-link"
-                    onClick={(e) => {
-                      localStorage.removeItem('user');
-                      // this.props.history.push('/');
-                      history.push('/');
-                      // window.location = '/';
-                    }}
-                  >
+                  <Link to="#" className="nav-link" onClick={this.props.logout}>
                     LogOut
                   </Link>
                 </Nav>
