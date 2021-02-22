@@ -29,7 +29,11 @@ export const getProduct = () => {
 export const createProduct = (incomingData) => {
   return (dispatch) => {
     axios
-      .post('http://localhost:4000/api/product/create-product', incomingData)
+      .post('http://localhost:4000/api/product/create-product', incomingData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then((response) => {
         return dispatch({
           type: CREATE_PRODUCT,
@@ -39,7 +43,7 @@ export const createProduct = (incomingData) => {
       .catch((err) => {
         return dispatch({
           type: CREATE_PRODUCT_ERR,
-          payload: err.response.data
+          payload: err.response.data,
         });
       });
   };
